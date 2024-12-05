@@ -1,18 +1,28 @@
 package Opdracht2;
 
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 class OpdrachtTweePartEen {
     public static void main(String[] args) {
         ReadFile reader = new ReadFile();
         reader.readFile();
+
         ArrayList<ArrayList<Integer>> list = reader.getList();
-        CheckModifications modichk = new CheckModifications();
+        CheckModifications checker = new CheckModifications();
 
+        int checksPassed = 0;
 
+        for (ArrayList<Integer> item : list) {
+            if (checker.checkFluctuations(item) && checker.CheckIncrease(item)) {
+                System.out.println(item);
+                checksPassed++;
+            }
+        }
+
+        System.out.println(checksPassed);
     }
 }
 
@@ -30,27 +40,45 @@ class CheckModifications {
 
         while (!list.isEmpty()) {
             if (firstRound) {
-                lastNumber = list.removeFirst();
+                lastNumber = list.getFirst();
                 firstRound = false;
+            } else if (lastNumber < list.getFirst()) {
+                goingUp.add(true);
             } else {
-                if (lastNumber < list.getFirst()) {
-                    goingUp.add(true);
-                } else {
-                    goingUp.add(false);
-                }
-                lastNumber = list.removeFirst();
+                goingUp.add(false);
+
             }
+            lastNumber = list.removeFirst();
         }
         return goingUp.stream().allMatch(e -> e.equals(goingUp.get(0)));
     }
 
     Boolean CheckIncrease(ArrayList<Integer> inputList) {
         ArrayList<Integer> list = new ArrayList<>(inputList);
-        
+        int lastNumber = 0;
+        boolean firstRound = true;
+
+        if (list.isEmpty()) {
+            return false;
+        }
+        while (!list.isEmpty()) {
+            if (firstRound) {
+                lastNumber = list.getFirst();
+                firstRound = false;
+            } else if (difference(lastNumber, list.getFirst()) >= 1 &&
+                difference(lastNumber, list.getFirst()) <= 3) {
+            } else {
+                return false;
+            }
+            lastNumber = list.removeFirst();
+        }
+        return true;
     }
 
+    int difference(int num1, int num2) {
+        return Math.abs(num1 - num2);
+    }
 }
-
 
 class ReadFile {
     ArrayList<ArrayList<Integer>> list = new ArrayList<>();
