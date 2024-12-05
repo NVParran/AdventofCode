@@ -17,7 +17,6 @@ class OpdrachtTweePartEen {
 
         for (ArrayList<Integer> item : list) {
             if (checker.checkFluctuations(item) && checker.CheckIncrease(item)) {
-                System.out.println(item);
                 checksPassed++;
             }
         }
