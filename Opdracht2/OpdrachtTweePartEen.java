@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 class OpdrachtTweePartEen {
     public static void main(String[] args) {
-        ReadFile reader = new ReadFile();
+        ReadFilePartOne reader = new ReadFilePartOne();
         reader.readFile();
 
         ArrayList<ArrayList<Integer>> list = reader.getList();
-        CheckModifications checker = new CheckModifications();
+        CheckModificationsPartOne checker = new CheckModificationsPartOne();
 
         int checksPassed = 0;
 
@@ -26,7 +26,7 @@ class OpdrachtTweePartEen {
     }
 }
 
-class CheckModifications {
+class CheckModificationsPartOne {
 
     boolean checkFluctuations(ArrayList<Integer> inputList) {
         ArrayList<Integer> list = new ArrayList<>(inputList);
@@ -66,7 +66,7 @@ class CheckModifications {
                 lastNumber = list.getFirst();
                 firstRound = false;
             } else if (difference(lastNumber, list.getFirst()) >= 1 &&
-                difference(lastNumber, list.getFirst()) <= 3) {
+                    difference(lastNumber, list.getFirst()) <= 3) {
             } else {
                 return false;
             }
@@ -80,7 +80,7 @@ class CheckModifications {
     }
 }
 
-class ReadFile {
+class ReadFilePartOne {
     ArrayList<ArrayList<Integer>> list = new ArrayList<>();
 
     void printList() {
