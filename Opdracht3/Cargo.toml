@@ -1,0 +1,16 @@
+[package]
+name = "Opdracht3"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "partOne"
+path = "src/OpdrachtDriePartEen.rs"
+
+[[bin]]
+name = "partTwo"
+path = "src/OpdrachtDriePartTwee.rs"
+
+[dependencies]
+regex = "1.11.1"
+regex-split = "0.1.0"
