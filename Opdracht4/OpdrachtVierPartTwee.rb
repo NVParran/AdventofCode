@@ -13,7 +13,7 @@ def find_x_patterns(grid)
       count += 1 if valid_x_pattern?(grid, r, c)
     end
   end
-
+  
   count
 end
 

@@ -3,7 +3,6 @@ use std::fs;
 
 fn main() {
     let input_string = fs::read_to_string("input.txt").expect("failed to read file");
-
     let filter = Regex::new(r"mul\((\d{1,3}),(\d{1,3})\)").unwrap();
 
     let mut addition = 0;

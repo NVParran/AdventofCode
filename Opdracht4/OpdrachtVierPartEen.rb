@@ -5,16 +5,7 @@ def main
 end
 
 def find_xmas_in_grid(grid)
-  directions = [
-    [0, 1],   
-    [0, -1],  
-    [1, 0],   
-    [-1, 0],  
-    [1, 1],   
-    [-1, -1], 
-    [1, -1],  
-    [-1, 1]   
-  ]
+  directions = [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [-1, -1], [1, -1], [-1, 1]]
   
   word = "XMAS"
   count = 0

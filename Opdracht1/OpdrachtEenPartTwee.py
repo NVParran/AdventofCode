@@ -1,6 +1,5 @@
 fileInput = open("Opdracht1/input.txt", "r")
 
-
 def slicelines(fileinput):
     linelist = [[], []]
     for line in fileinput.readlines():
@@ -10,7 +9,6 @@ def slicelines(fileinput):
             linelist[1].append(int(parts[1]))
     return linelist
 
-
 def numandamount(linelist):
     occurencelist = []
     for line in linelist[0]:
@@ -18,7 +16,4 @@ def numandamount(linelist):
     combined = [[a, b] for a, b in zip(linelist[0], occurencelist)]
     return combined
 
-
-finalAnswer = sum((item[0] * item[1]) for item in numandamount(slicelines(fileInput)))
-
-print(finalAnswer)
+print(sum((item[0] * item[1]) for item in numandamount(slicelines(fileInput))))

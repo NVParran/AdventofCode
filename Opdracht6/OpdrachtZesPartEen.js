@@ -25,15 +25,15 @@ while (true) {
 	const nextRow = x + dx;
 	const nextCol = y + dy;
 
-	if (isOutOfBounds(nextX, nextY)) {
+	if (isOutOfBounds(nextRow, nextCol)) {
 		break;
 	}
 
 	if (map[nextRow][nextCol] === '#') {
 		dir = (dir + 1) % 4;
 	} else {
-		x = nextX;
-		y = nextY;
+		x = nextRow;
+		y = nextCol;
 		visited.add(`${x},${y}`);
 	}
 }

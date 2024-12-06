@@ -25,7 +25,6 @@ class OpdrachtTweePartTwee {
 	}
 }
 
-
 class CheckModificationsPartTwo {
 	int evaluateList(ArrayList<Integer> list) {
 		if (isValid(list)) {

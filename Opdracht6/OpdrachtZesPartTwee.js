@@ -31,7 +31,6 @@ function simulate(map, startRow, startCol) {
 	}
 }
 
-
 function countWallPlacements(map, startRow, startCol) {
 	let count = 0;
 

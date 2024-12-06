@@ -47,7 +47,6 @@ func IsValidSequence(sequence []int, rules []Rule) bool {
 		xIndex, xExists := indexMap[rule.x]
 		yIndex, yExists := indexMap[rule.y]
 
-		// If both x and y exist, check their order
 		if xExists && yExists && xIndex > yIndex {
 			return false
 		}

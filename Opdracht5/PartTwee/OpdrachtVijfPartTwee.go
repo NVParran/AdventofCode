@@ -56,7 +56,6 @@ func IsValidSequence(sequence []int, rules []Rule) bool {
 	return true
 }
 
-// FixSequence adjusts a sequence to respect the rules
 func FixSequence(sequence []int, rules []Rule) []int {
 	swapped := true
 	for swapped {
@@ -72,7 +71,6 @@ func FixSequence(sequence []int, rules []Rule) []int {
 				}
 			}
 
-			// Swap x and y if they are out of order
 			if xIndex != -1 && yIndex != -1 && xIndex > yIndex {
 				sequence[xIndex], sequence[yIndex] = sequence[yIndex], sequence[xIndex]
 				swapped = true
@@ -82,7 +80,6 @@ func FixSequence(sequence []int, rules []Rule) []int {
 	return sequence
 }
 
-// FindMiddleNumber finds the middle number in a sequence
 func FindMiddleNumber(sequence []int) int {
 	mid := len(sequence) / 2
 	return sequence[mid]
