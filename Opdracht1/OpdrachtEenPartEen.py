@@ -1,4 +1,4 @@
-fileInput = open("input.txt", "r")
+fileInput = open("Opdracht1/input.txt", "r")
 
 
 def slicelines(fileinput):
