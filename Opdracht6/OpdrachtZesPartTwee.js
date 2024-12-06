@@ -1,47 +1,62 @@
 const fs = require('fs');
+const map = fs.readFileSync('Opdracht6/input.txt', 'utf8').trim().split('\n');
 
-const mapInput = fs.readFileSync('Opdracht6/input.txt', 'utf8').trim();
-const map = mapInput.split('\n').map(line => line.split(''));
+const DIRECTIONS = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
-const directions = [
-	[-1, 0],
-	[0, 1],
-	[1, 0],
-	[0, -1],
-];
+function simulate(map, startRow, startCol) {
+	const rows = map.length;
+	const cols = map[0].length;
+	const visited = new Set();
+	let row = startRow;
+	let col = startCol;
+	let dir = 0;
 
-let x = 0, y = 0;
-for (let i = 0; i < map.length; i++) {
-	for (let j = 0; j < map[i].length; j++) {
-		if (map[i][j] === '^') {
-			x = i;
-			y = j;
-			break;
+	while (true) {
+		const state = `${row},${col},${dir}`;
+		if (visited.has(state)) return true;
+		visited.add(state);
+
+		const [dx, dy] = DIRECTIONS[dir];
+		const nextRow = row + dx;
+		const nextCol = col + dy;
+
+		if (nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= cols) return false;
+
+		if (map[nextRow][nextCol] === '#') {
+			dir = (dir + 1) % 4;
+		} else {
+			row = nextRow;
+			col = nextCol;
 		}
 	}
 }
 
-let direction = 0;
-const visited = new Set();
-visited.add(`${x},${y}`);
 
-const isOutOfBounds = (nx, ny) => nx < 0 || nx >= map.length || ny < 0 || ny >= map[0].length;
+function countWallPlacements(map, startRow, startCol) {
+	let count = 0;
 
-while (true) {
-	const [dx, dy] = directions[direction];
-	const nextX = x + dx;
-	const nextY = y + dy;
+	for (let r = 0; r < map.length; r++) {
+		for (let c = 0; c < map[r].length; c++) {
+			if (map[r][c] === '.') {
+				map[r] = map[r].slice(0, c) + '#' + map[r].slice(c + 1);
 
-	if (isOutOfBounds(nextX, nextY)) {
-		break;
+				if (simulate(map, startRow, startCol)) count++;
+
+				map[r] = map[r].slice(0, c) + '.' + map[r].slice(c + 1);
+			}
+		}
 	}
 
-	if (map[nextX][nextY] === '#') {
-		direction = (direction + 1) % 4;
-	} else {
-		x = nextX;
-		y = nextY;
-		visited.add(`${x},${y}`);
+	return count;
+}
+
+let startRow, startCol;
+for (let r = 0; r < map.length; r++) {
+	const col = map[r].indexOf('^');
+	if (col !== -1) {
+		startRow = r;
+		startCol = col;
+		map[r] = map[r].replace('^', '.');
 	}
 }
-console.log('Visited cells count:', visited.size);
+console.log(countWallPlacements(map, startRow, startCol));
